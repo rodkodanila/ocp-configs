@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-operator
+  namespace: argocd
+spec:
+  project: operators 
+  source:
+    repoURL: 'https://github.com/rodkodanila/ocp-configs.git'
+    targetRevision: main
+    path: argocd-operator
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
