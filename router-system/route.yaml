@@ -3,8 +3,8 @@ kind: Route
 metadata:
   namespace: openshift-console
   name: console-system
-  label: 
-    type: system
+  labels: 
+    app.kubernetes.io/instance: system-router
 spec:
   host: console-openshift-console.system.redcluster.danila.home
   port:
