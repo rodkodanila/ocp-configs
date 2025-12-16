@@ -1,0 +1,23 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: openshift-console
+  name: argocd-route-patch
+rules:
+  - apiGroups: ["route.openshift.io"]
+    resources: ["routes"]
+    verbs: ["get", "list", "watch", "patch", "update"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: openshift-console
+  name: argocd-route-patch-binding
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  kind: Role
+  name: argocd-route-patch
+  apiGroup: rbac.authorization.k8s.io
