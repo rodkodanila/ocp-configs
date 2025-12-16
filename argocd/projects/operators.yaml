@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: operators
-  namespace: argocd
+  namespace: openshift-gitops 
 spec:
   description: Project for my microservices managed via Argo CD
   sourceRepos:
