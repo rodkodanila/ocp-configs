@@ -11,4 +11,5 @@ spec:
     provider: dex
     dex:
       openShiftOAuth: true
-
+      config: |
+        insecureSkipVerify: true
