@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/rodkodanila/ocp-configs.git'
     targetRevision: main
-    path: openshift-cluster/cluster-sec/cluster-configs/machine-cluster-config
+    path: openshift-cluster/cluster-sec/cluster-configs/machines-cluster-config
   destination:
     server: https://kubernetes.default.svc
     namespace: openshift-gitops-operator 
