@@ -6,7 +6,7 @@ metadata:
   labels:
     machine.openshift.io/cluster-api-cluster: cilium-vwpvj
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       machine.openshift.io/cluster-api-cluster: cilium-vwpvj
@@ -22,11 +22,11 @@ spec:
       providerSpec:
         value:
           numCoresPerSocket: 4
-          diskGiB: 60
+          diskGiB: 50
           snapshot: ''
           userDataSecret:
             name: worker-user-data
-          memoryMiB: 12000
+          memoryMiB: 10000
           credentialsSecret:
             name: vsphere-cloud-credentials
           network:
