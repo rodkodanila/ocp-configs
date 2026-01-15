@@ -13,13 +13,4 @@ spec:
       openShiftOAuth: true
       config: |
         insecureSkipVerify: true
-        connectors:
-        - config:
-            clientID: system:serviceaccount:openshift-gitops:openshift-gitops-argocd-dex-server
-            clientSecret: $oidc.dex.clientSecret
-            groups: []
-            insecureCA: true
-            issuer: https://kubernetes.default.svc
-            redirectURI: https://openshift-gitops-server-openshift-gitops.apps.cilium.danila.home/auth/callback
-          id: openshift
-          name: OpenShift
+       
