@@ -1,0 +1,95 @@
+---
+apiVersion: config.openshift.io/v1
+kind: Scheduler
+metadata:
+  name: cluster
+spec:
+  mastersSchedulable: false
+  policy:
+    name: ''
+  profile: LowNodeUtilization
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: worker-system-reserved
+spec:
+  kubeletConfig:
+    streamingConnectionIdleTimeout: "5s"
+    evictionHard:
+      imagefs.available: 7%
+      imagefs.inodesFree: 5%
+      memory.available: 0.5Gi
+      nodefs.available: 5%
+      nodefs.inodesFree: 4%
+    evictionPressureTransitionPeriod: 2m
+    evictionSoft:
+      imagefs.available: 15%
+      imagefs.inodesFree: 10%
+      memory.available: 2Gi
+      nodefs.available: 15%
+      nodefs.inodesFree: 12%
+    evictionSoftGracePeriod:
+      imagefs.available: 1m30s
+      imagefs.inodesFree: 1m30s
+      memory.available: 1m30s
+      nodefs.available: 1m30s
+      nodefs.inodesFree: 1m30s
+    imageGCHighThresholdPercent: 90
+    imageGCLowThresholdPercent: 70
+    imageMinimumGCAge: 5m
+  autoSizingReserved: true
+  machineConfigPoolSelector:
+    matchLabels:
+      pools.operator.machineconfiguration.openshift.io/worker: ''
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: ContainerRuntimeConfig
+metadata:
+  name: custom-pidslimit
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  machineConfigPoolSelector:
+    matchLabels:
+      pools.operator.machineconfiguration.openshift.io/worker: ""
+  containerRuntimeConfig:
+    pidsLimit: 4096
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 99-master-chrony
+spec:
+  config:
+    ignition:
+      version: 3.5.0
+    storage:
+      files:
+        - contents:
+            compression: ""
+            source: data:,server%20192.168.11.1%20iburst%20%0Adriftfile%20%2Fvar%2Flib%2Fchrony%2Fdrift%0Amakestep%201.0%203%0Artcsync%0Alogdir%20%2Fvar%2Flog%2Fchrony%0A
+          mode: 420
+          overwrite: true
+          path: /etc/chrony.conf
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 99-worker-chrony
+spec:
+  config:
+    ignition:
+      version: 3.5.0
+    storage:
+      files:
+        - contents:
+            compression: ""
+            source: data:,server%20192.168.11.1%20iburst%20%0Adriftfile%20%2Fvar%2Flib%2Fchrony%2Fdrift%0Amakestep%201.0%203%0Artcsync%0Alogdir%20%2Fvar%2Flog%2Fchrony%0A
+          mode: 420
+          overwrite: true
+          path: /etc/chrony.conf
