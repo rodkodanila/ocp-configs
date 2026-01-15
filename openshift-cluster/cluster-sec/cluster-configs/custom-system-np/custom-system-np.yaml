@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-kube-api-egress
+  namespace: openshift-cloud-credential-operator  # Apply where the error occurs
+spec:
+  podSelector: {}  # Applies to all pods in the namespace
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 172.30.0.1/32  # Your API server IP
+    ports:
+    - protocol: TCP
+      port: 443
+---
