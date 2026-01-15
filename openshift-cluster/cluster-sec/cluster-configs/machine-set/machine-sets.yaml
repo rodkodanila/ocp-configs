@@ -26,7 +26,7 @@ spec:
           snapshot: ''
           userDataSecret:
             name: worker-user-data
-          memoryMiB: 8196
+          memoryMiB: 12000
           credentialsSecret:
             name: vsphere-cloud-credentials
           network:
