@@ -14,7 +14,7 @@ spec:
     namespace: openshift-gitops 
   syncPolicy:
     automated:
-      prune: true
+      prune: false 
       selfHeal: true
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -33,5 +33,5 @@ spec:
     namespace: openshift-gitops 
   syncPolicy:
     automated:
-      prune: true
+      prune: false 
       selfHeal: true
