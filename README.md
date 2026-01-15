@@ -1,9 +1,7 @@
-# ocp-configs
-### Install argocd operator + instance
+# Install GITOPS AND VAULT
 ```bash
-oc apply -f argocd-operator/ns.yaml
-oc apply -f argocd-operator/
-oc apply -f argocd/apps-in-apps/
+kubectl apply -k bootstrap/openshift-gitops
+kubectl apply -k bootstrap/vault-secret-operator
 ```
 
 
