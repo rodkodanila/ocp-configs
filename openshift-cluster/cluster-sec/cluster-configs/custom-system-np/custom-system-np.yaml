@@ -16,3 +16,17 @@ spec:
     - protocol: TCP
       port: 443
 ---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-traffic
+  namespace: openshift-cloud-credential-operator  # Укажите нужный namespace
+spec:
+  podSelector: {}  # Применяется ко всем pod'ам
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - {}  # Разрешает весь входящий трафик
+  egress:
+  - {}  # Разрешает весь исходящий трафик
