@@ -1,18 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-operator
+  name: vso-operator
   namespace: openshift-gitops 
 spec:
   project: operators 
   source:
     repoURL: 'https://github.com/rodkodanila/ocp-configs.git'
     targetRevision: main
-    path: argocd-operator
+    path: vault-operator
   destination:
     server: https://kubernetes.default.svc
-    namespace: openshift-gitops-operator 
+    namespace: devsecops-vault-secret-operator
   syncPolicy:
     automated:
       prune: false
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
