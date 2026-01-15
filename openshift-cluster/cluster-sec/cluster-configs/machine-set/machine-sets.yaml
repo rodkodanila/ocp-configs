@@ -58,9 +58,9 @@ spec:
       machine.openshift.io/cluster-api-machineset: worker-4x8
   unhealthyConditions:
   - type: "Ready"
-    timeout: "300s"
+    timeout: "600s"
     status: "False"
   - type: "Ready"
-    timeout: "300s"
+    timeout: "600s"
     status: "Unknown"
   maxUnhealthy: "1"
