@@ -11,10 +11,4 @@ spec:
     provider: dex
     dex:
       openShiftOAuth: true
-      config: |
-        insecureSkipVerify: true
-  rbac:
-    defaultPolicy: 'role:readonly'
-    policy: |
-      g, system:cluster-admins, role:admin
-    scopes: '[groups]'
+
