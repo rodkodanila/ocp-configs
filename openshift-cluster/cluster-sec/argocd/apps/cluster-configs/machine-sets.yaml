@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: machine-sets 
+  namespace: openshift-gitops 
+spec:
+  project: cluster-config 
+  source:
+    repoURL: 'https://github.com/rodkodanila/ocp-configs.git'
+    targetRevision: main
+    path: openshift-cluster/cluster-sec/cluster-configs/machine-set
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-gitops-operator 
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
