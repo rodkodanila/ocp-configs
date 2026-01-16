@@ -4,17 +4,17 @@ metadata:
   name: worker-4x8
   namespace: openshift-machine-api
   labels:
-    machine.openshift.io/cluster-api-cluster: cilium-vwpvj
+    machine.openshift.io/cluster-api-cluster: cilium-s2bxs
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      machine.openshift.io/cluster-api-cluster: cilium-vwpvj
+      machine.openshift.io/cluster-api-cluster: cilium-s2bxs
       machine.openshift.io/cluster-api-machineset: worker-4x8 
   template:
     metadata:
       labels:
-        machine.openshift.io/cluster-api-cluster: cilium-vwpvj
+        machine.openshift.io/cluster-api-cluster: cilium-s2bxs
         machine.openshift.io/cluster-api-machine-role: worker
         machine.openshift.io/cluster-api-machine-type: worker
         machine.openshift.io/cluster-api-machineset: worker-4x8 
@@ -38,11 +38,11 @@ spec:
           kind: VSphereMachineProviderSpec
           workspace:
             datacenter: dc1
-            datastore: /dc1/datastore/ssd
-            folder: /dc1/vm/cilium-vwpvj
+            datastore: /dc1/datastore/hdd
+            folder: /dc1/vm/cilium-s2bxs
             resourcePool: /dc1/host/ocp_cluster/Resources
             server: 192.168.8.170
-          template: cilium-vwpvj-rhcos-generated-failure-domain
+          template: cilium-s2bxs-rhcos-generated-failure-domain
           apiVersion: machine.openshift.io/v1beta1
 # ---
 # apiVersion: machine.openshift.io/v1beta1
