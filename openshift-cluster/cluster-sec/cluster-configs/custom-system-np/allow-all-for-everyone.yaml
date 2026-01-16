@@ -1,0 +1,22 @@
+# Cilium policy allowing all pods to talk to the Kubernetes API server
+apiVersion: "cilium.io/v2"
+kind: CiliumClusterwideNetworkPolicy # Cluster-scoped policy for all namespaces
+metadata:
+  name: "allow-all-egress-to-kube-apiserver"
+spec:
+  endpointSelector: {} # Applies to all pods in the cluster
+  egress:
+  # Rule 1: Allow egress to the 'kube-apiserver' entity
+  - toEntities:
+    - "kube-apiserver" # Cilium's reserved identity for the API server
+  # Rule 2: Allow DNS queries to the cluster DNS service (required for service discovery)
+  - toEndpoints:
+    - matchLabels:
+        "k8s:io.kubernetes.pod.namespace": "openshift-dns" # OpenShift DNS namespace
+    toPorts:
+    - ports:
+      - port: "5353" # Standard port for OpenShift DNS
+        protocol: ANY
+      rules:
+        dns:
+        - matchPattern: "*" # Allow all DNS queries
