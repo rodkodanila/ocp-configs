@@ -44,23 +44,23 @@ spec:
             server: 192.168.8.170
           template: cilium-vwpvj-rhcos-generated-failure-domain
           apiVersion: machine.openshift.io/v1beta1
----
-apiVersion: machine.openshift.io/v1beta1
-kind: MachineHealthCheck
-metadata:
-  name: worker-4x8
-  namespace: openshift-machine-api
-spec:
-  selector:
-    matchLabels:
-      machine.openshift.io/cluster-api-machine-role: worker
-      machine.openshift.io/cluster-api-machine-type: worker
-      machine.openshift.io/cluster-api-machineset: worker-4x8
-  unhealthyConditions:
-  - type: "Ready"
-    timeout: "1200s"
-    status: "False"
-  - type: "Ready"
-    timeout: "1200s"
-    status: "Unknown"
-  maxUnhealthy: "1"
+# ---
+# apiVersion: machine.openshift.io/v1beta1
+# kind: MachineHealthCheck
+# metadata:
+#   name: worker-4x8
+#   namespace: openshift-machine-api
+# spec:
+#   selector:
+#     matchLabels:
+#       machine.openshift.io/cluster-api-machine-role: worker
+#       machine.openshift.io/cluster-api-machine-type: worker
+#       machine.openshift.io/cluster-api-machineset: worker-4x8
+#   unhealthyConditions:
+#   - type: "Ready"
+#     timeout: "1200s"
+#     status: "False"
+#   - type: "Ready"
+#     timeout: "1200s"
+#     status: "Unknown"
+#   maxUnhealthy: "1"
