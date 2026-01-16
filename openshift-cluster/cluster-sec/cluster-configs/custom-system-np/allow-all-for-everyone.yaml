@@ -11,7 +11,7 @@ spec:
   # Rule 1: Allow HTTPS to the specific external IP
   - to:
     - ipBlock:
-        cidr: 19.168.8.170/32
+        cidr: 192.168.8.170/32
     ports:
     - protocol: TCP
       port: 443
